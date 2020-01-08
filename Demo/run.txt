@@ -1,0 +1,5 @@
+app.py is for flask 
+scrapping.py is for scrapping
+
+to run 
+python app.py

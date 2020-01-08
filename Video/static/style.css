@@ -1,0 +1,23 @@
+body{
+	background: #013220;
+}
+video {
+  min-width: 100%;
+  height: auto;
+
+}
+div{
+ margin-top: 20px;
+}
+h1{
+	color: white;
+}
+h2{
+	color: #86C232;
+}
+hr{
+	color: black;
+	border-width: 2px;
+	border-style: inset;
+	display: block;
+}
