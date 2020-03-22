@@ -15,11 +15,6 @@ with open("results2.json",'r') as f:
 
 data = []
 
-total = int(ditc['totalConfirmed'])
-deaths = int(ditc['totalDeaths'])
-recov = int(ditc['totalRecovered'])
-active = total - deaths - recov
-print(str(total)+" "+str(deaths)+" "+str(recov)+" "+str(active)+"\n")
 areas = list(ditc['areas'])
 for area in areas:
     totald = area['totalConfirmed']
@@ -31,10 +26,10 @@ for area in areas:
     lng = area['long']
     if totald<10:
         for i in range(totald):
-            data.append({"latitude":lat,"longitude":lng,"place":name,"usertype":"admin","condition":"active"})
+            data.append({"latitude":lat,"longitude":lng,"place":name})
     else:    
         for i in range((totald%10)+2):
-            data.append({"latitude":lat,"longitude":lng,"place":name,"usertype":"admin","condition":"active"})
+            data.append({"latitude":lat,"longitude":lng,"place":name})
     aras = list(area['areas'])
     for ar in aras:
         totald = ar['totalConfirmed']
@@ -46,10 +41,10 @@ for area in areas:
         lng = ar['long']
         if totald<10:
             for i in range(totald):
-                data.append({"latitude":lat,"longitude":lng,"place":name,"usertype":"admin","condition":"active"})
+                data.append({"latitude":lat,"longitude":lng,"place":name})
         else:    
             for i in range((totald%10)+2):
-                data.append({"latitude":lat,"longitude":lng,"place":name,"usertype":"admin","condition":"active"})
+                data.append({"latitude":lat,"longitude":lng,"place":name})
         region = list(ar['areas'])
         for rg in region:
             rtotald = rg['totalConfirmed']
@@ -61,10 +56,10 @@ for area in areas:
             rlng = rg['long']
             if rtotald<10:
                 for i in range(rtotald):
-                    data.append({"latitude":rlat,"longitude":rlng,"place":rname,"usertype":"admin","condition":"active"})
+                    data.append({"latitude":rlat,"longitude":rlng,"place":rname})
             else:    
                 for i in range((rtotald%10)+2):
-                    data.append({"latitude":rlat,"longitude":rlng,"place":rname,"usertype":"admin","condition":"active"})
+                    data.append({"latitude":rlat,"longitude":rlng,"place":rname})
 
 url = "https://api.papersqueeze.com/corona/addlocation/"
 headers = {"Authorization":"Token da0646e9548cb3fca6ac7e15ed2810a2fd53d2f5"}
@@ -77,5 +72,5 @@ for row in data:
     dat['place'] = row["place"]
     dat['latitude'] = float(row["latitude"])
     dat['longitude'] = float(row["longitude"])
-    response = requests.post(url,headers=headers,data=data)
+    response = requests.post(url,headers=headers,data=dat)
     print(response.json())
